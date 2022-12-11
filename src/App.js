@@ -1,23 +1,50 @@
-import logo from './logo.svg';
-import './App.css';
+// import Counter from "./Components/Counter";
+// import TodoByUseStateHook from "./TodoByUseStateHook";
+// import Timer from "./Components/Timer";
+import {useEffect, useRef, useState} from "react";
+import Button from "./Components/Button"
+import Title from "./Components/Title";
+import ShowCount from "./Components/ShowCount";
+import InputCompo from "./Components/InputCompo";
 
 function App() {
+  const [count1,setCount1]= useState(0);
+  const [count2,setCount2]= useState(0);
+  const inputField= useRef();
+
+  const incrementByOne=()=>{
+
+    setCount1((prevState)=>(prevState+1));
+  };
+  const incrementByFive=()=>{
+
+    setCount2((prevState)=>(prevState+5));
+  };
+
+  useEffect(()=>{
+    console.log(inputField.current);
+    inputField.current.focus();
+  },[]);
+ 
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Title/>
+      <ShowCount count={count1} title="counter 1"/>
+      <Button handler={incrementByOne}>Increment By One</Button>
+      <hr/>
+      <ShowCount count={count2} title="counter 2"/>
+      <Button handler={incrementByFive}>Increment By One</Button>
+      <hr/>
+      <InputCompo ref={inputField}/>
+      <InputCompo />
+
+
+
+
+      {/* <Counter/> */}
+      {/* <TodoByUseStateHook/> */}
+      {/* <Timer/> */}
     </div>
   );
 }
